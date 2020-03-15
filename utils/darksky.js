@@ -11,20 +11,20 @@ const getConfigData = () => {
 
 const forecast = (coordinate, callback) => {
     const config = getConfigData();
-    const darkskyRequestUrl = config.url + config.key + '/' + coordinate.latitude + ',' + coordinate.longitude;
+    const url = config.url + config.key + '/' + coordinate.latitude + ',' + coordinate.longitude;
 
-    request({url: darkskyRequestUrl, json: true}, (error, response) => {
+    request({url, json: true}, (error, {body}) => {
         if(error){
             callback("There was an error. Please try again later", undefined);
             return;
         }
     
-        if (response.body.error){
-            callback('Unable to find location. Error code: ' + response.body.error + ' ' + 'Error message: ' + response.body.error, undefined);
+        if (body.error){
+            callback('Unable to find location. Error code: ' + body.error + ' ' + 'Error message: ' + body.error, undefined);
             return;
         }
         
-        callback(undefined, response.body.daily.data.shift().summary)
+        callback(undefined, body.daily.data.shift().summary)
     });
 };
 

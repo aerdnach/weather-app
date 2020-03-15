@@ -14,30 +14,29 @@ const getConfigData = () => {
 const geocode = (address, callback) => {
     const config = getConfigData();
     const queryString = address + '.json?access_token=' + config.token + '&limit=' + config.limit + '&language=' + config.language; 
-    const mapboxRequestUrl = config.url + queryString;
+    const url = config.url + queryString;
 
-    request({url: mapboxRequestUrl, json: true}, (error, response) => {
+    request({url, json: true}, (error, {body}) => {
         if(error){
             callback('There was an error. Please try again later', undefined);
             return;
         }
     
-        if(response.body.message){
-            callback('Location not found [' + response.body.message + ']', undefined);
+        if(body.message){
+            callback('Location not found [' + body.message + ']', undefined);
             return;
         }
     
-        if(response.body.features.length === 0){
+        if(body.features.length === 0){
             callback('Location not found.', undefined)
             return;
         }
         
         callback(undefined, {
-            longitude: response.body.features[0].center[1],
-            latitude: response.body.features[0].center[0],
-            location: response.body.features[0].place_name
+            longitude: body.features[0].center[0],
+            latitude: body.features[0].center[1],
+            location: body.features[0].place_name
         });
-        return;
     }); 
 };
 

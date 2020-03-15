@@ -1,20 +1,21 @@
 const mapbox = require('./utils/mapbox.js');
 const darksky = require('./utils/darksky.js');
 
-// https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoiYW5kcmVhY2hpZXBwYSIsImEiOiJjazdxaGpnYWYwM2UzM2VvdTh2aGdzNGpvIn0.oIbn_IIJj9AwfkelwTy2uw
+const address = process.argv[2];
 
-const latitude = '41.153734';
-const longitude = '16.412965';
-const address = encodeURIComponent("Corato");
+if (!address){
+    return console.log('Provide a location.')
+}
 
-mapbox.geocode (address, (error, data) => {
-    console.log(error);
-    console.log(data);
+mapbox.geocode (address, (error, {latitude, longitude, location}) => {
+    if (error){
+        return console.log(error);
+    }
+
+    darksky.forecast({latitude: latitude, longitude: longitude}, (error, darkskyData) => {
+        if (error){
+            return console.log(error);
+        }
+        console.log('Weather is ' + darkskyData + '\n' + location + ' [' + longitude + ', ' + latitude + ']');
+    });
 }); 
-
-darksky.forecast({latitude: latitude, longitude: longitude}, (error, data) => {
-    console.log(error);
-    console.log(data);
-});
-
-console.log("main function end");

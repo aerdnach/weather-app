@@ -1,1 +1,1 @@
-A simple nodejs based weater app (for study/practice).
+A simple nodejs/express based weater app (for study/practice).

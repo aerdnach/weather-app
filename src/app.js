@@ -37,7 +37,7 @@ app.get('/help', (req, res) => {
     res.render('help', {
         title: 'Help',
         author: 'aerdnach',
-        message: 'This is an help message from'
+        message: 'This is a useless help message from'
     });
 })
 
@@ -63,10 +63,9 @@ app.get('/weather', (req, res) => {
             }
 
             res.send({
-                forecast: 'Weather is ' + darkskyData + '<br>' + location + ' [' + longitude + ', ' + latitude + ']',
-                location: location,
+                forecast: 'Weather is ' + darkskyData,
+                location: location + ' [' + longitude + ', ' + latitude + ']'
             })
-            console.log("adasd");
         });
     }); 
 })

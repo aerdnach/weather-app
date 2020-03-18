@@ -24,7 +24,7 @@ const forecast = (coordinate, callback) => {
             return;
         }
         
-        callback(undefined, body.daily.data.shift().summary)
+        callback(undefined, body)
     });
 };
 

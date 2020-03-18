@@ -49,7 +49,7 @@ app.get('/weather', (req, res) => {
         })
     }
 
-    mapbox.geocode (req.query.address, (error, {latitude, longitude, location} = {}) => {
+    mapbox.geocode(req.query.address, (error, {latitude, longitude, location, mapBoxData} = {}) => {
         if (error){
             return res.send({
                 error: error
@@ -64,8 +64,10 @@ app.get('/weather', (req, res) => {
             }
 
             res.send({
-                forecast: 'Weather is ' + darkskyData,
-                location: location + ' [' + longitude + ', ' + latitude + ']'
+                forecast: 'Weather is ' + darkskyData.daily.data.shift().summary,
+                location: location + ' [' + longitude + ', ' + latitude + ']',
+                mapBoxResponse: JSON.stringify(mapBoxData, null, 2),
+                darkSkyResponse: JSON.stringify(darkskyData, null, 2)
             })
         });
     }); 

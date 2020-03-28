@@ -3,7 +3,7 @@ const request = require('request');
 const getConfigData = () => {
     const data = {
         url: "https://api.darksky.net/forecast/",
-        key: "4eafd66f94af94f1479966809a14bedb"
+        key: process.env.DARKSKY_KEY
     }
 
     return data;

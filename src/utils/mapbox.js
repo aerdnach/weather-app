@@ -3,7 +3,7 @@ const request = require('request');
 const getConfigData = () => {
     const data = {
         url: "https://api.mapbox.com/geocoding/v5/mapbox.places/",
-        token: "pk.eyJ1IjoiYW5kcmVhY2hpZXBwYSIsImEiOiJjazdxaGpnYWYwM2UzM2VvdTh2aGdzNGpvIn0.oIbn_IIJj9AwfkelwTy2uw",
+        token: process.env.MAPBOX_TOKEN,
         language: "it",
         limit: 1
     }

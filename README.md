@@ -12,7 +12,7 @@ Create a free account for:
 
 - https://www.mapbox.com/
 
-Crete a config folder, in this dir create a file named dev.env. In this file put two variable named
+Create a config folder in project root, in this dir create a file named dev.env. In this file put two variable named:
 - DARKSKY_KEY=*your_darksky_key*
 - MAPBOX_TOKEN=*your_mapbox_token*
 

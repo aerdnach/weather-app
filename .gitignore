@@ -1,0 +1,9 @@
+# Dependency directories
+node_modules/
+config/
+
+# Optional npm cache directory
+.npm
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
